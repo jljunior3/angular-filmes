@@ -11,7 +11,17 @@ angular.module("Filmes").controller("FilmesController", function ($scope, Filmes
 
     $scope.novoFilme = {};
 
+    $scope.resetForm = function () {
+        $scope.formulario.$setPristine();
+        $scope.formulario.$setUntouched();
+    }
+
     $scope.adicionarFilme = function () {
+        $scope.formulario.$setDirty();
+
+        if($scope.formulario.$invalid)
+            return;
+        
         var filme = {
             id: Date.now() + "",
             titulo: $scope.novoFilme.titulo,
